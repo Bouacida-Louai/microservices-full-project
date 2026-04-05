@@ -1,6 +1,7 @@
 package org.sid.orderservice.controller;
 
 
+import org.sid.orderservice.dto.OrderResponseDTO;
 import org.sid.orderservice.entity.Order;
 import org.sid.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order create(@RequestBody Order order) {
+    public OrderResponseDTO create(@RequestBody Order order) {
         return orderService.createOrder(order);
     }
 }
