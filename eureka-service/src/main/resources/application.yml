@@ -1,5 +1,17 @@
 spring:
   application:
-    name: eureka-service
+    name: eureka-server
   config:
-    import: "optional:configserver:http://localhost:8888"
+    import: "optional:configserver:http://config-server:8888"
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    register-with-eureka: false    # ← CRITICAL
+    fetch-registry: false          # ← CRITICAL
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/

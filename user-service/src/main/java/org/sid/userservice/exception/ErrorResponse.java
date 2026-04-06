@@ -1,5 +1,4 @@
 package org.sid.userservice.exception;
-
 import java.time.LocalDateTime;
 
 public class ErrorResponse {
