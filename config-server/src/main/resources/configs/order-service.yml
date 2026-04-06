@@ -4,8 +4,10 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
   instance:
+    # Local dev: JVM/Netty often cannot resolve Windows names like *.mshome.net
+    hostname: localhost
     prefer-ip-address: true
 
 spring:
@@ -14,6 +16,10 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
   jpa:
     hibernate:
       ddl-auto: create-drop

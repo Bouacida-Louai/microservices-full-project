@@ -8,7 +8,6 @@ import org.sid.orderservice.dto.UserDTO;
 import org.sid.orderservice.entity.Order;
 import org.sid.orderservice.exception.BadRequestException;
 import org.sid.orderservice.exception.ResourceNotFoundException;
-import org.sid.orderservice.exception.ServiceUnavailableException;
 import org.sid.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,27 +41,9 @@ public class OrderService {
             throw new BadRequestException("Quantity must be greater than 0");
         }
 
-        UserDTO user;
-        try {
-            user = userClient.getUserById(order.getUserId());
-        } catch (ResourceNotFoundException | BadRequestException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ServiceUnavailableException(
-                    "User service unavailable or user not found with id: "
-                            + order.getUserId());
-        }
-
-        ProductDTO product;
-        try {
-            product = productClient.getProductById(order.getProductId());
-        } catch (ResourceNotFoundException | BadRequestException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ServiceUnavailableException(
-                    "Product service unavailable or product not found with id: "
-                            + order.getProductId());
-        }
+        // no try/catch → fallback handles failures automatically ✅
+        UserDTO user = userClient.getUserById(order.getUserId());
+        ProductDTO product = productClient.getProductById(order.getProductId());
 
         Order saved = orderRepository.save(order);
 

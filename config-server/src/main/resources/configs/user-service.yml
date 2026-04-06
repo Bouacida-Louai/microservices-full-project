@@ -4,8 +4,9 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
   instance:
+    hostname: localhost
     prefer-ip-address: true
 
 spring:
@@ -17,6 +18,7 @@ spring:
   h2:
     console:
       enabled: true
+      path: /h2-console
   jpa:
     hibernate:
       ddl-auto: create-drop
