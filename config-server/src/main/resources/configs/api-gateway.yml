@@ -12,9 +12,17 @@ eureka:
 spring:
   cloud:
     gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: true
-              lower-case-service-id: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+app:
+  jwt:
+    secret: 0123456789abcdef0123456789abcdef
+  security:
+    public-paths:
+      - /auth-service/auth/**
+      - /actuator/**
+    admin-paths:
+      - /user-service/users/admin/**
