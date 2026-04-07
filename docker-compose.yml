@@ -56,6 +56,20 @@ services:
       - SPRING_CONFIG_IMPORT=configserver:http://config-server:8888
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
 
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "8084:8084"
+    restart: on-failure
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS=true
+
   order-service:
     build: ./order-service
     container_name: order-service

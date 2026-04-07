@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    enabled: false
+
+app:
+  jwt:
+    secret: 0123456789abcdef0123456789abcdef
+    expiration-ms: 86400000
